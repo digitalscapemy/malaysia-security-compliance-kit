@@ -1,0 +1,117 @@
+---
+title: "Expert Report of {{EXPERT_NAME}}"
+subtitle: "{{CASE_TITLE}} — {{COURT_NAME}}, {{CASE_NO}}"
+author:
+  - "{{EXPERT_NAME}}, {{EXPERT_TITLE}}"
+  - "Instructed by {{INSTRUCTING_PARTY}} ({{INSTRUCTING_SOLICITORS}})"
+date: "{{REPORT_DATE}} · Document reference {{DOC_REF}}"
+documentclass: article
+geometry: margin=1in
+fontsize: 11pt
+mainfont: "Inter"
+toc: true
+header-includes: |
+  \usepackage{fancyhdr}
+  \usepackage{lastpage}
+  \pagestyle{fancy}
+  \fancyhf{}
+  \fancyhead[L]{\small Expert Report — {{EXPERT_NAME}}}
+  \fancyhead[R]{\small {{CASE_NO}}}
+  \fancyfoot[C]{\footnotesize {{CASE_TITLE}}}
+  \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+---
+
+# 1. Introduction
+
+This is the expert report of {{EXPERT_NAME}} in the matter of {{CASE_TITLE}}, before
+{{COURT_NAME}} ({{CASE_NO}}). I have been instructed by {{INSTRUCTING_PARTY}}, through
+{{INSTRUCTING_SOLICITORS}}, to provide an independent expert opinion on the matters set out in §3.
+
+I am aware that my opinion is tendered under section 45 of the Evidence Act 1950, and that my
+overriding duty is to assist the Court, independently and impartially, irrespective of who instructed
+or pays me. My declaration to that effect appears at §9.
+
+# 2. Qualifications and experience
+
+{{EXPERT_QUALIFICATIONS}}
+
+By reason of the above, I am a person specially skilled in information security and data protection
+within the meaning of section 45 of the Evidence Act 1950.
+
+# 3. Instructions and scope
+
+**Instructed by:** {{INSTRUCTING_PARTY}} ({{INSTRUCTING_SOLICITORS}}).
+
+**Questions I was asked to address:** {{INSTRUCTIONS_AND_QUESTIONS}}
+
+**Materials examined:** {{MATERIALS_EXAMINED}}
+
+# 4. Methodology
+
+{{METHODOLOGY}}
+
+**Tools and versions:** {{TOOLS_AND_VERSIONS}}
+
+**Forensic integrity:** Every item of evidence relied on in this report was hashed with SHA-256 at the
+time of collection and recorded with the exact command that produced it, enabling independent
+reproduction. Timestamps are ISO-8601 with Malaysian time zone (+08:00). The evidence register is
+append-only; any alteration to an exhibit changes its hash and is therefore detectable. See §8.
+
+# 5. Findings
+
+{{FINDINGS}}
+
+# 6. Opinion
+
+In my independent professional opinion, and assessed against the applicable standards as in force on
+{{LAW_AS_OF_DATE}}:
+
+{{OPINION}}
+
+# 7. Basis and limitations of opinion
+
+{{BASIS_AND_LIMITATIONS}}
+
+# 8. Evidence register (exhibits)
+
+The following exhibits are referred to above. Each is hashed (SHA-256) and reproducible via the
+stated command.
+
+{{EXHIBIT_TABLE}}
+
+# 9. Declaration and statement of truth
+
+I, {{EXPERT_NAME}}, declare that:
+
+1. I understand that my overriding duty in giving evidence is to assist the Court on matters within
+   my expertise, and that this duty overrides any obligation to the party who instructed or pays me.
+2. I have complied with that duty and will continue to comply with it.
+3. I have set out in this report all matters within my knowledge that are relevant to the opinions I
+   have expressed, and I have drawn the Court's attention to any matter that would affect the validity
+   of those opinions.
+4. The opinions expressed are my own honest, independent, and impartial professional opinions, based
+   on the findings and evidence set out above.
+5. Where I have relied on the work or opinion of others, I have said so.
+
+**Statement of truth:** I confirm that the facts I have stated in this report are true to the best of
+my knowledge and belief, and that the opinions I have expressed are my honest professional opinions.
+
+\vspace{2cm}
+
+Signed: ______________________________
+
+Name: {{EXPERT_NAME}}
+
+Title: {{EXPERT_TITLE}}
+
+Date: {{REPORT_DATE}}
+
+# Appendix A — Curriculum vitae
+
+{{APPENDIX_CV}}
+
+# Appendix B — Raw exhibit contents
+
+{{APPENDIX_RAW_EXHIBITS}}
