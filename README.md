@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🇲🇾 Malaysia Security & Compliance Kit
+# Malaysia Security & Compliance Kit
 
 ### Ship software in Malaysia that survives both attackers *and* regulators.
 
