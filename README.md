@@ -117,6 +117,24 @@ evidence artifact to keep.
 
 ---
 
+## 🔧 Recommended scanning & pentest tools
+
+The kit tells you *what* to check; these tools *prove* it. Run them, keep the output — each report is
+a dated evidence artifact that defends the PDPA Security Principle (and feeds the forthcoming
+evidence-reporter as a hashed exhibit). All four are free / open-source or have a free tier.
+
+| Tool | Type | Use it to |
+|---|---|---|
+| [**OWASP ZAP**](https://www.zaproxy.org/) | DAST (dynamic) | Actively scan a *running* web app / API for injection, XSS, auth flaws, misconfig — the hands-on pentest proxy. Maps to `03-application-security.md`. |
+| [**HostedScan**](https://hostedscan.com/) | Hosted vuln scanning | Run external, scheduled scans (OWASP ZAP / OpenVAS / Nmap) from outside your network and get shareable reports — good for *recurring* evidence and a third-party-looking artifact. |
+| [**Nuclei**](https://github.com/projectdiscovery/nuclei) | Template-based scanner | Fast, CI-friendly checks against thousands of community templates (CVEs, exposures, misconfig). Drop it in your pipeline for continuous coverage. |
+| [**Trivy**](https://trivy.dev/) | SCA / container / IaC / secrets | Scan dependencies, container images, IaC, and the filesystem for vulnerabilities **and secrets** — and generate an **SBOM**. Maps to `02-secure-build-playbook.md` (SCA + SBOM + hardcoded-credential scan). |
+
+> **Coverage at a glance:** Trivy + Nuclei in CI for *continuous* build-time evidence; OWASP ZAP for
+> *deep* manual web/API pentests; HostedScan for *scheduled external* scans. Keep every report, dated.
+
+---
+
 ## 🗺️ Roadmap
 
 The kit is evolving from a *knowledge* plugin into a full **compliance evidence & litigation toolkit**.
