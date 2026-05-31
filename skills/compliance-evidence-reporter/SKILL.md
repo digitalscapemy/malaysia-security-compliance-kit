@@ -45,8 +45,10 @@ Knowledge of *what* to check lives in the `malaysia-security-compliance` skill; 
    - `assets/templates/expert-witness-report.md.tmpl` — an independent expert report (Evidence Act
      1950 s.45; impartiality declaration), or
    - `assets/templates/offensive-gap-analysis.md.tmpl` — a plaintiff-side gap analysis showing the
-     other party fell below the standard. See `references/document-types.md`, `references/expert-witness.md`,
-     and `references/offensive-gap-analysis.md`.
+     other party fell below the standard, or
+   - `assets/templates/incident-forensic-report.md.tmpl` — a data-breach / incident report (timeline,
+     scope, 72h/7d notification record). See `references/document-types.md` and the matching
+     `references/*.md` for each type.
 5. **Render:**
    `python assets/scripts/render_document.py --input filled.md --outdir out --reference-docx assets/templates/reference.docx --register register-numbered.jsonl`
 
