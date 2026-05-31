@@ -40,7 +40,10 @@ Knowledge of *what* to check lives in the `malaysia-security-compliance` skill; 
    `python assets/scripts/hash_evidence.py --file <artifact> --description "..." --command "<cmd>"`
 3. **Build the register:**
    `python assets/scripts/build_register.py --register evidence-register.jsonl --out-summary exhibits.md --out-validated register-numbered.jsonl`
-4. **Fill** `assets/templates/defensive-due-diligence.md.tmpl` from the findings + `exhibits.md`.
+4. **Fill** a template from the findings + `exhibits.md` (paste the table into `{{EXHIBIT_TABLE}}`):
+   - `assets/templates/defensive-due-diligence.md.tmpl` — a party proving reasonable measures, or
+   - `assets/templates/expert-witness-report.md.tmpl` — an independent expert report (Evidence Act
+     1950 s.45; impartiality declaration). See `references/document-types.md` and `references/expert-witness.md`.
 5. **Render:**
    `python assets/scripts/render_document.py --input filled.md --outdir out --reference-docx assets/templates/reference.docx --register register-numbered.jsonl`
 
