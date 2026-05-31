@@ -5,15 +5,15 @@
     "url": "https://github.com/digitalscapemy"
   },
   "metadata": {
-    "description": "Malaysian security & compliance skills for Claude Code — PDPA 2024, Cyber Security Act 2024, OWASP web/API/mobile, secure SDLC, and ready-to-fill compliance documents.",
-    "version": "1.0.0"
+    "description": "Malaysian security & compliance skills for Claude Code — PDPA 2024, Cyber Security Act 2024, OWASP web/API/mobile, secure SDLC, ready-to-fill compliance documents, and a forensic-grade court-ready report engine.",
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "malaysia-security-compliance",
       "source": "./",
-      "description": "Build, review, and launch software in Malaysia that survives both attackers and regulators. Routes to references on PDPA/Cyber Security Act duties, OWASP controls, secure build, and compliance document templates.",
-      "version": "1.0.0",
+      "description": "Build, review, and launch software in Malaysia that survives both attackers and regulators. Includes the malaysia-security-compliance knowledge skill (PDPA/Cyber Security Act duties, OWASP controls, secure build, document templates) and the compliance-evidence-reporter engine that turns an assessment into hashed evidence and a court-ready .docx/.pdf report.",
+      "version": "1.1.0",
       "author": {
         "name": "Digitalscape",
         "url": "https://github.com/digitalscapemy"
@@ -26,7 +26,9 @@
         "compliance",
         "security",
         "owasp",
-        "audit"
+        "audit",
+        "forensics",
+        "litigation"
       ]
     }
   ]

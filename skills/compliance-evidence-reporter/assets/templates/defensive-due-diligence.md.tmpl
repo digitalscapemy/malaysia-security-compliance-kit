@@ -1,0 +1,93 @@
+---
+title: "Defensive Due-Diligence Report"
+subtitle: "Reasonable Security Measures under the PDPA 2010 (as amended by Act A1727, 2024) Security Principle"
+author:
+  - "Prepared by {{PREPARER_NAME}}, {{PREPARER_TITLE}}"
+  - "for {{PARTY_NAME}}"
+date: "{{REPORT_DATE}} · Document reference {{DOC_REF}} (version {{DOC_VERSION}})"
+documentclass: article
+geometry: margin=1in
+fontsize: 11pt
+mainfont: "Inter"
+toc: true
+header-includes: |
+  \usepackage{fancyhdr}
+  \usepackage{lastpage}
+  \pagestyle{fancy}
+  \fancyhf{}
+  \fancyhead[L]{\small {{PARTY_NAME}}}
+  \fancyhead[R]{\small Doc Ref: {{DOC_REF}}}
+  \fancyfoot[C]{\footnotesize CONFIDENTIAL — Prepared in Contemplation of Litigation}
+  \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+---
+
+# 1. Executive summary
+
+{{EXECUTIVE_SUMMARY}}
+
+This report sets out the security measures implemented by {{PARTY_NAME}} in respect of
+{{SYSTEM_NAME}}, and the evidence supporting each, to demonstrate that reasonable steps were taken to
+protect personal data in accordance with the PDPA Security Principle.
+
+# 2. Scope and methodology
+
+**Scope of assessment:** {{SCOPE_DESCRIPTION}}
+
+**Assessment window:** {{ASSESSMENT_START}} to {{ASSESSMENT_END}} (MYT).
+
+**Tools and versions:** {{TOOLS_AND_VERSIONS}}
+
+**Forensic integrity:** Every item of evidence in this report was hashed with SHA-256 at the time of
+collection and recorded with the exact command that produced it, enabling independent reproduction.
+Timestamps are ISO-8601 with Malaysian time zone (+08:00). The evidence register is append-only; any
+alteration to an exhibit changes its hash and is therefore detectable. See §6 (Evidence Register).
+
+**Limitations and impartiality:** {{LIMITATIONS_STATEMENT}}
+
+# 3. Legal framework
+
+The applicable obligations are summarised below and assessed as in force on {{LAW_AS_OF_DATE}}.
+
+{{LEGAL_FRAMEWORK}}
+
+> Sources: see the cited references in the accompanying assessment. This report is engineering
+> evidence and does not constitute legal advice.
+
+# 4. Controls implemented
+
+| Control | Evidence (exhibit) | Date | Status |
+|---|---|---|---|
+{{CONTROLS_TABLE_ROWS}}
+
+# 5. Findings and remediation
+
+{{FINDINGS_AND_REMEDIATION}}
+
+# 6. Evidence register (exhibits)
+
+The following exhibits are referenced above. Each is hashed (SHA-256) and reproducible via the stated
+command.
+
+{{EXHIBIT_TABLE}}
+
+# 7. Declaration
+
+I, {{PREPARER_NAME}}, confirm that the assessment described in this report was carried out as stated,
+that the exhibits listed in §6 are true copies of the artifacts collected, and that the SHA-256
+hashes recorded were computed from those artifacts at the time of collection.
+
+\vspace{2cm}
+
+Signed: ______________________________
+
+Name: {{PREPARER_NAME}}
+
+Title: {{PREPARER_TITLE}}
+
+Date: {{REPORT_DATE}}
+
+# Appendix A — Raw exhibit contents
+
+{{APPENDIX_RAW_EXHIBITS}}
