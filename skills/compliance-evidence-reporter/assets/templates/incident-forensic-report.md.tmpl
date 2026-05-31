@@ -1,0 +1,101 @@
+---
+title: "Data Breach Incident & Forensic Report"
+subtitle: "{{ORG_NAME}} — Incident {{INCIDENT_REF}}"
+author:
+  - "Prepared by {{PREPARER_NAME}}, {{PREPARER_TITLE}}"
+  - "for {{ORG_NAME}}"
+date: "{{REPORT_DATE}} · Document reference {{DOC_REF}}"
+documentclass: article
+geometry: margin=1in
+fontsize: 11pt
+mainfont: "Inter"
+toc: true
+header-includes: |
+  \usepackage{fancyhdr}
+  \usepackage{lastpage}
+  \pagestyle{fancy}
+  \fancyhf{}
+  \fancyhead[L]{\small {{ORG_NAME}}}
+  \fancyhead[R]{\small Incident {{INCIDENT_REF}}}
+  \fancyfoot[C]{\footnotesize CONFIDENTIAL — Data Breach Incident Report}
+  \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+---
+
+# 1. Summary
+
+{{INCIDENT_SUMMARY}}
+
+The incident was detected on {{DETECTION_DATETIME}} (MYT). This report sets out the timeline, the
+scope of affected personal data, the root cause, the containment and remediation actions, and the
+record of notification under the PDPA breach-notification duties.
+
+# 2. Incident timeline
+
+All times are ISO-8601, Malaysian time zone (+08:00). Each entry cites a hashed exhibit where one
+exists (see §7).
+
+| Time (MYT) | Event | Reference |
+|---|---|---|
+{{INCIDENT_TIMELINE_ROWS}}
+
+# 3. Scope and affected data
+
+**Systems affected:** {{SYSTEMS_AFFECTED}}
+
+**Categories of personal data:** {{DATA_CATEGORIES}}
+
+**Sensitive personal data involved:** {{SENSITIVE_DATA_INVOLVED}}
+
+**Number of data subjects affected:** {{AFFECTED_SUBJECTS_COUNT}}
+
+{{SCOPE_NARRATIVE}}
+
+# 4. Root cause
+
+{{ROOT_CAUSE}}
+
+# 5. Containment and remediation
+
+{{CONTAINMENT_AND_REMEDIATION}}
+
+# 6. Notification record
+
+Where the breach causes or is likely to cause significant harm, the PDPA requires notification of the
+Commissioner (JPDP) **no later than 72 hours** from the breach, and of affected data subjects
+**within 7 days** after notifying the Commissioner (as in force on {{LAW_AS_OF_DATE}}).
+
+| Recipient | Deadline | Notified (MYT) | Method / reference |
+|---|---|---|---|
+{{NOTIFICATION_ROWS}}
+
+{{NOTIFICATION_NARRATIVE}}
+
+# 7. Evidence register (exhibits)
+
+The following exhibits are referred to above. Each is hashed (SHA-256) and reproducible via the
+stated command.
+
+{{EXHIBIT_TABLE}}
+
+# 8. Declaration and statement of truth
+
+I, {{PREPARER_NAME}}, confirm that this report is a true account of the incident as established at the
+date of the report; that the exhibits listed in §7 are true copies of the artifacts collected; and
+that the SHA-256 hashes recorded were computed from those artifacts at the time of collection. Where
+facts remained under investigation at the date of this report, I have said so.
+
+\vspace{2cm}
+
+Signed: ______________________________
+
+Name: {{PREPARER_NAME}}
+
+Title: {{PREPARER_TITLE}}
+
+Date: {{REPORT_DATE}}
+
+# Appendix A — Raw exhibit contents
+
+{{APPENDIX_RAW_EXHIBITS}}

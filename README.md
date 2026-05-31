@@ -92,6 +92,11 @@ The **`compliance-evidence-reporter`** skill turns an assessment into **provable
    controls table, legal mapping, hashed exhibit register, and a signed declaration, with a
    *"CONFIDENTIAL — Prepared in Contemplation of Litigation"* footer on every page.
 
+It ships **four document types** on one engine — pick the template for your posture: **Defensive
+Due-Diligence** (defendant), **Expert-Witness Report** (independent, Evidence Act 1950 s.45),
+**Offensive Gap-Analysis** (plaintiff), and **Incident / Forensic Report** (breach timeline + 72h/7d
+notification record).
+
 Forensic by design: hashes are copy-exact and every exhibit is reproducible, so the report survives
 cross-examination. Three standard-library Python scripts do the deterministic work (hash → register →
 render); Claude does the assessment and legal mapping.
@@ -173,8 +178,8 @@ The kit is evolving from a *knowledge* plugin into a full **compliance evidence 
 |---|---|
 | ✅ **Shipped** | `malaysia-security-compliance` skill — law + OWASP controls + document templates |
 | ✅ **Shipped** | `compliance-evidence-reporter` — forensic-grade engine that turns an assessment into **hashed evidence (SHA-256 + reproducible commands)** and a **court-ready `.docx` + `.pdf`** report |
-| ✅ **Shipped** | **Document types:** Defensive Due-Diligence · **Expert-Witness Report** (Evidence Act 1950 s.45) · **Offensive Gap-Analysis** (plaintiff-side, graded gaps vs the standard) |
-| 📋 **Planned** | Incident / forensic report (72h/7d notification timeline) |
+| ✅ **Shipped** | **All four document types:** Defensive Due-Diligence · **Expert-Witness Report** (Evidence Act 1950 s.45) · **Offensive Gap-Analysis** (plaintiff-side) · **Incident / Forensic Report** (breach timeline + 72h/7d notification record) |
+| 🔭 **Next** | Per-document refinements, optional cryptographic PDF signing, and the same engine for new jurisdictions |
 
 > Design spec: [`docs/specs/2026-05-31-evidence-reporter-design.md`](docs/specs/2026-05-31-evidence-reporter-design.md)
 
