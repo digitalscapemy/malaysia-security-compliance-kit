@@ -173,8 +173,8 @@ The kit is evolving from a *knowledge* plugin into a full **compliance evidence 
 |---|---|
 | ✅ **Shipped** | `malaysia-security-compliance` skill — law + OWASP controls + document templates |
 | ✅ **Shipped** | `compliance-evidence-reporter` — forensic-grade engine that turns an assessment into **hashed evidence (SHA-256 + reproducible commands)** and a **court-ready `.docx` + `.pdf`** report |
-| ✅ **Shipped** | **Document types:** Defensive Due-Diligence Report · **Expert-Witness Report** (Evidence Act 1950 s.45 — impartiality declaration + statement of truth) |
-| 📋 **Planned** | Offensive gap-analysis · Incident / forensic report (72h/7d notification timeline) |
+| ✅ **Shipped** | **Document types:** Defensive Due-Diligence · **Expert-Witness Report** (Evidence Act 1950 s.45) · **Offensive Gap-Analysis** (plaintiff-side, graded gaps vs the standard) |
+| 📋 **Planned** | Incident / forensic report (72h/7d notification timeline) |
 
 > Design spec: [`docs/specs/2026-05-31-evidence-reporter-design.md`](docs/specs/2026-05-31-evidence-reporter-design.md)
 

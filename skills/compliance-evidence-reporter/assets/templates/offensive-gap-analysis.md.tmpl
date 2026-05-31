@@ -1,0 +1,115 @@
+---
+title: "Security Gap-Analysis Report"
+subtitle: "{{CASE_TITLE}} — {{COURT_NAME}}, {{CASE_NO}}"
+author:
+  - "{{EXPERT_NAME}}, {{EXPERT_TITLE}}"
+  - "Instructed by {{INSTRUCTING_PARTY}} ({{INSTRUCTING_SOLICITORS}})"
+date: "{{REPORT_DATE}} · Document reference {{DOC_REF}}"
+documentclass: article
+geometry: margin=1in
+fontsize: 11pt
+mainfont: "Inter"
+toc: true
+header-includes: |
+  \usepackage{fancyhdr}
+  \usepackage{lastpage}
+  \pagestyle{fancy}
+  \fancyhf{}
+  \fancyhead[L]{\small Gap Analysis — {{EXPERT_NAME}}}
+  \fancyhead[R]{\small {{CASE_NO}}}
+  \fancyfoot[C]{\footnotesize {{CASE_TITLE}}}
+  \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+---
+
+# 1. Introduction
+
+This report is prepared by {{EXPERT_NAME}} in the matter of {{CASE_TITLE}}, before {{COURT_NAME}}
+({{CASE_NO}}). I have been instructed by {{INSTRUCTING_PARTY}}, through {{INSTRUCTING_SOLICITORS}}, to
+assess {{ASSESSED_SUBJECT}} against the applicable security standard and to identify any respects in
+which it fell below that standard.
+
+This report is tendered as expert evidence under section 45 of the Evidence Act 1950. My overriding
+duty is to the Court; my declaration appears at §9.
+
+# 2. Applicable standard
+
+The conduct assessed is measured against the following, as in force on {{LAW_AS_OF_DATE}}:
+
+{{APPLICABLE_STANDARD}}
+
+# 3. Methodology
+
+{{METHODOLOGY}}
+
+**Materials examined:** {{MATERIALS_EXAMINED}}
+
+**Tools and versions:** {{TOOLS_AND_VERSIONS}}
+
+**Forensic integrity:** Every item of evidence relied on was hashed with SHA-256 at the time of
+collection and recorded with the exact command that produced it, enabling independent reproduction.
+Timestamps are ISO-8601 with Malaysian time zone (+08:00). The evidence register is append-only; any
+alteration to an exhibit changes its hash and is therefore detectable. See §8.
+
+# 4. Gap analysis
+
+Each row records one deficiency measured against the standard in §2. Severity is graded
+Critical / High / Medium / Low.
+
+| Area | Required standard | Observed (exhibit) | Gap & severity |
+|---|---|---|---|
+{{GAP_ANALYSIS_ROWS}}
+
+# 5. Severity and impact
+
+{{SEVERITY_AND_IMPACT}}
+
+# 6. Causation and contribution
+
+{{CAUSATION_AND_CONTRIBUTION}}
+
+> Causation is ultimately a matter for the Court. The above is limited to the technical contribution
+> of the identified gaps.
+
+# 7. Conclusion
+
+{{CONCLUSION}}
+
+# 8. Evidence register (exhibits)
+
+The following exhibits are referred to above. Each is hashed (SHA-256) and reproducible via the
+stated command.
+
+{{EXHIBIT_TABLE}}
+
+# 9. Declaration and statement of truth
+
+I, {{EXPERT_NAME}}, declare that:
+
+1. I understand that my overriding duty in giving evidence is to assist the Court on matters within
+   my expertise, and that this duty overrides any obligation to the party who instructed or pays me.
+2. I have complied with that duty and will continue to comply with it.
+3. I have set out all matters within my knowledge relevant to the opinions expressed, and have drawn
+   the Court's attention to any matter that would affect the validity of those opinions, including any
+   that does not support the party instructing me.
+4. The opinions expressed are my own honest, independent, and impartial professional opinions, based
+   on the findings and evidence set out above.
+5. Where I have relied on the work or opinion of others, I have said so.
+
+**Statement of truth:** I confirm that the facts I have stated in this report are true to the best of
+my knowledge and belief, and that the opinions I have expressed are my honest professional opinions.
+
+\vspace{2cm}
+
+Signed: ______________________________
+
+Name: {{EXPERT_NAME}}
+
+Title: {{EXPERT_TITLE}}
+
+Date: {{REPORT_DATE}}
+
+# Appendix A — Raw exhibit contents
+
+{{APPENDIX_RAW_EXHIBITS}}

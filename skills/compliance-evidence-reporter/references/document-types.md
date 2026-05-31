@@ -7,7 +7,7 @@ different framing. Phase 1 ships the first; the rest are planned on the same spi
 |---|---|---|---|
 | **Defensive Due-Diligence Report** | Defendant | Prove reasonable security measures were taken (PDPA Security Principle) | Shipped — `assets/templates/defensive-due-diligence.md.tmpl` |
 | **Expert-Witness Report** | Independent | Technical findings + methodology + impartiality declaration + expert's duty to the court (Evidence Act 1950 s.45) | Shipped — `assets/templates/expert-witness-report.md.tmpl` (see `expert-witness.md`) |
-| **Offensive Gap-Analysis** | Plaintiff | Show the other side fell below the PDPA/OWASP standard | Planned |
+| **Offensive Gap-Analysis** | Plaintiff | Show the other side fell below the PDPA/OWASP standard | Shipped — `assets/templates/offensive-gap-analysis.md.tmpl` (see `offensive-gap-analysis.md`) |
 | **Incident / Forensic Report** | Either | Timeline, breach scope, affected data, 72h/7d notification record, remediation | Planned |
 
 All four reuse `hash_evidence.py`, `build_register.py`, and `render_document.py`. Adding a type =
