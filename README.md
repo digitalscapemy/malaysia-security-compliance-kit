@@ -2,20 +2,21 @@
 
 # Malaysia Security & Compliance Kit
 
-### Ship software in Malaysia that survives both attackers *and* regulators.
+### Ship software in Malaysia that survives both attackers *and* regulators — then prove it in court.
 
 A [Claude Code](https://claude.com/claude-code) plugin that bakes Malaysian law (**PDPA 2024**,
 **Cyber Security Act 2024**) and security practice (**OWASP** web / API / mobile, secure SDLC,
-infra & ops) directly into your build — and gives you the **documents to prove it.**
+infra & ops) into your build — and turns an assessment into **hashed evidence and court-ready
+`.docx` + `.pdf` reports.**
 
 <br>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.4.0-blue)](#️-roadmap)
 [![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-Plugin-8A63D2)](https://claude.com/claude-code)
 [![PDPA 2024](https://img.shields.io/badge/PDPA-Amendment%202024-success)](skills/malaysia-security-compliance/references/01-malaysian-law.md)
 [![Cyber Security Act 2024](https://img.shields.io/badge/Cyber%20Security%20Act-2024-success)](skills/malaysia-security-compliance/references/01-malaysian-law.md)
 [![Jurisdiction: Malaysia](https://img.shields.io/badge/Jurisdiction-Malaysia-red)](#)
-[![Version](https://img.shields.io/badge/version-1.1.0-blue)](#️-roadmap)
 
 </div>
 
@@ -23,8 +24,8 @@ infra & ops) directly into your build — and gives you the **documents to prove
 
 > ### ⚖️ Core principle: **evidence beats code.**
 > Regulators and courts don't punish imperfect code alone — they punish the inability to **prove**
-> due diligence. Every control in this kit has a matching artifact to keep, dated. Apply the controls
-> **and** produce the documents. Code without paperwork still loses in court.
+> due diligence. Every control here has a matching artifact to keep, dated and hashed. Apply the
+> controls **and** produce the documents. Code without paperwork still loses in court.
 
 ---
 
@@ -32,14 +33,24 @@ infra & ops) directly into your build — and gives you the **documents to prove
 
 Most security guides are written for the US/EU. Malaysian builders face a **different legal reality**:
 
-- The **PDPA Amendment 2024** (full force **1 June 2025**) made **data processors directly liable** for
-  the Security Principle — most dev shops, SaaS, and hosting providers. *You cannot contract this away.*
+- The **PDPA Amendment 2024** (full force **1 June 2025**) made **data processors directly liable**
+  for the Security Principle — most dev shops, SaaS, and hosting providers. *You cannot contract this
+  away.*
 - The **Cyber Security Act 2024** (in force **26 August 2024**) adds duties for entities tied to
   National Critical Information Infrastructure.
 - Breach notification, DPO thresholds, and cross-border transfer rules now carry **real penalties.**
 
-This kit turns those obligations into concrete engineering controls and ready-to-file documents —
-without you needing to reverse-engineer the statutes yourself.
+This kit turns those obligations into concrete engineering controls **and** the dated, hashed
+evidence you need to defend — or prove — a case.
+
+## The two skills
+
+The plugin ships two skills that work together: one tells you *what* to do, the other *proves* you did it.
+
+| Skill | What it is |
+|---|---|
+| 🛡️ **`malaysia-security-compliance`** | The **knowledge kit** — Malaysian law + OWASP web/API/mobile controls + secure-SDLC + fill-in compliance documents. Auto-activates on security reviews, PDPA questions, OWASP assessments, and pre-go-live gates. |
+| 📑 **`compliance-evidence-reporter`** | The **evidence engine** — turns an assessment into a SHA-256 chain-of-custody register and a **court-ready `.docx` + `.pdf`** report, in four document types. |
 
 ## Who it's for
 
@@ -47,16 +58,15 @@ without you needing to reverse-engineer the statutes yourself.
 |---|---|
 | 👩‍💻 A developer / dev shop | A pre-go-live gate and OWASP controls mapped to Malaysian law |
 | 🏢 A SaaS / hosting operator | Your data-processor duties, spelled out, with the documents to satisfy them |
-| 🔍 A security auditor | Control tables with a *"how to verify"* column for every item |
-| ⚖️ An expert witness / legal advisor | The legal framework, penalties, and sources — **plus a forensic-grade engine that produces court-ready evidence reports** |
+| 🔍 A security auditor | Control tables with a *"how to verify"* column, plus a hashed evidence register |
+| ⚖️ An expert witness / legal advisor | The legal framework **and** a forensic engine that produces court-ready expert, defence, plaintiff, and breach reports |
 
 ---
 
-## ✨ What's inside
+## 🛡️ The knowledge skill — what's inside
 
-The **`malaysia-security-compliance`** skill auto-activates on security reviews, PDPA / Cyber
-Security Act questions, OWASP assessments, pre-go-live gates, and compliance-document drafting. It
-routes to **only** the reference a task needs — never dumping everything at once.
+`malaysia-security-compliance` routes to **only** the reference a task needs — never dumping
+everything at once.
 
 | 📄 Reference | Covers |
 |---|---|
@@ -80,33 +90,39 @@ routes to **only** the reference a task needs — never dumping everything at on
 
 ---
 
-## 📑 Court-ready evidence reports `new in v1.1.0`
+## 📑 The evidence engine — court-ready reports
 
-The **`compliance-evidence-reporter`** skill turns an assessment into **provable evidence** and a
-**court-ready document** — for PDPA matters, breach investigations, customer audits, or litigation.
+`compliance-evidence-reporter` turns an assessment into **provable evidence** and a **court-ready
+document**. It is forensic by design: every exhibit is SHA-256 hashed at collection and recorded with
+the exact command that produced it, so the report survives cross-examination.
 
-1. **Hashes every exhibit** — SHA-256 + ISO-8601 (MYT) timestamp + the exact command that produced
-   it, appended to an append-only chain-of-custody register.
-2. **Numbers the exhibits** (A-1, A-2 …) and builds the evidence register.
-3. **Renders** a **Defensive Due-Diligence Report** to **`.docx` + `.pdf`** — table of contents,
-   controls table, legal mapping, hashed exhibit register, and a signed declaration, with a
-   *"CONFIDENTIAL — Prepared in Contemplation of Litigation"* footer on every page.
+**How it works** — three standard-library Python scripts do the deterministic work; Claude does the
+assessment and legal mapping:
 
-It ships **four document types** on one engine — pick the template for your posture: **Defensive
-Due-Diligence** (defendant), **Expert-Witness Report** (independent, Evidence Act 1950 s.45),
-**Offensive Gap-Analysis** (plaintiff), and **Incident / Forensic Report** (breach timeline + 72h/7d
-notification record).
+```
+hash_evidence.py   →   build_register.py   →   render_document.py
+SHA-256 + MYT          validate + number       Markdown template
+timestamp + the        exhibits (A-1, A-2)      → .docx + .pdf
+exact command          + exhibit blocks         via pandoc + xelatex
+```
 
-Forensic by design: hashes are copy-exact and every exhibit is reproducible, so the report survives
-cross-examination. Three standard-library Python scripts do the deterministic work (hash → register →
-render); Claude does the assessment and legal mapping.
+**Four document types, one engine** — pick the template for your posture:
 
-**Prerequisites:** Python 3.10+, [pandoc](https://pandoc.org/installing.html) + a LaTeX engine with
-**xelatex** (TeX Live / MiKTeX) for PDF, and the **Inter** font (or change `mainfont` in the
-template). Full procedure: [`skills/compliance-evidence-reporter/references/workflow.md`](skills/compliance-evidence-reporter/references/workflow.md).
+| Document | Posture | Hallmark |
+|---|---|---|
+| **Defensive Due-Diligence** | Defendant | "reasonable security measures were taken" (PDPA Security Principle) |
+| **Expert-Witness Report** | Independent | duty-to-court declaration + statement of truth (**Evidence Act 1950 s.45**) |
+| **Offensive Gap-Analysis** | Plaintiff | graded gap table (Critical/High/Medium/Low) vs PDPA/OWASP |
+| **Incident / Forensic Report** | Either | breach timeline + scope + **72h / 7-day notification record** |
 
-> More document types — expert-witness, offensive gap-analysis, incident/forensic — are on the
-> [roadmap](#️-roadmap), built on the same engine.
+Each report carries a cover, table of contents, the relevant analysis, a **hashed exhibit register**,
+and a signed declaration — typeset in a clean modern font with a header/footer on every page. Full
+procedure: [`workflow.md`](skills/compliance-evidence-reporter/references/workflow.md); document
+specifics: [`document-types.md`](skills/compliance-evidence-reporter/references/document-types.md).
+
+**Render prerequisites:** Python 3.10+, [pandoc](https://pandoc.org/installing.html) + a LaTeX engine
+with **xelatex** (TeX Live / MiKTeX) for PDF, and the **Inter** font (or change `mainfont` in the
+template). The scripts fail loudly with install guidance if a tool is missing.
 
 ---
 
@@ -119,9 +135,9 @@ template). Full procedure: [`skills/compliance-evidence-reporter/references/work
 /plugin install malaysia-security-compliance
 ```
 
-### Manual
+This installs both skills. For PDF/DOCX rendering, also install pandoc + xelatex + Inter (see above).
 
-Copy the skill into your skills directory:
+### Manual
 
 ```bash
 # Every project (user-level) — copy both skills
@@ -131,24 +147,21 @@ cp -r skills/malaysia-security-compliance skills/compliance-evidence-reporter ~/
 cp -r skills/malaysia-security-compliance skills/compliance-evidence-reporter <project>/.claude/skills/
 ```
 
-> The `compliance-evidence-reporter` skill additionally needs pandoc + xelatex + the Inter font to
-> render documents (see [Court-ready evidence reports](#-court-ready-evidence-reports-new-in-v110)).
-
 ---
 
 ## 💬 Usage
 
-Once installed, just work as normal — the skill activates itself. Try:
+Once installed, just work as normal — the skills activate themselves. Try:
 
 > *"Is this codebase PDPA compliant?"*
 > *"Run a pre-go-live security gate on this repo."*
 > *"Scan for hardcoded credentials and secrets in git history."*
 > *"Draft a breach-response runbook for a SaaS handling 50,000 users."*
-> *"Do I need to appoint a DPO?"*
 > *"Produce a court-ready due-diligence report with hashed evidence for this codebase."*
+> *"Write an expert-witness report on whether this system met the PDPA Security Principle."*
 
-It reads only the reference(s) the task needs, applies the controls, and points you at the matching
-evidence artifact to keep — or, for the last example, hashes the evidence and renders the report.
+The knowledge skill reads only the reference a task needs and points you at the evidence artifact to
+keep; the engine hashes that evidence and renders the report.
 
 ---
 
@@ -163,7 +176,7 @@ a dated evidence artifact that defends the PDPA Security Principle (and feeds th
 | [**OWASP ZAP**](https://www.zaproxy.org/) | DAST (dynamic) | Actively scan a *running* web app / API for injection, XSS, auth flaws, misconfig — the hands-on pentest proxy. Maps to `03-application-security.md`. |
 | [**HostedScan**](https://hostedscan.com/) | Hosted vuln scanning | Run external, scheduled scans (OWASP ZAP / OpenVAS / Nmap) from outside your network and get shareable reports — good for *recurring* evidence and a third-party-looking artifact. |
 | [**Nuclei**](https://github.com/projectdiscovery/nuclei) | Template-based scanner | Fast, CI-friendly checks against thousands of community templates (CVEs, exposures, misconfig). Drop it in your pipeline for continuous coverage. |
-| [**Trivy**](https://trivy.dev/) | SCA / container / IaC / secrets | Scan dependencies, container images, IaC, and the filesystem for vulnerabilities **and secrets** — and generate an **SBOM**. Maps to `02-secure-build-playbook.md` (SCA + SBOM + hardcoded-credential scan). |
+| [**Trivy**](https://trivy.dev/) | SCA / container / IaC / secrets | Scan dependencies, container images, IaC, and the filesystem for vulnerabilities **and secrets** — and generate an **SBOM**. Maps to `02-secure-build-playbook.md`. |
 
 > **Coverage at a glance:** Trivy + Nuclei in CI for *continuous* build-time evidence; OWASP ZAP for
 > *deep* manual web/API pentests; HostedScan for *scheduled external* scans. Keep every report, dated.
@@ -172,16 +185,14 @@ a dated evidence artifact that defends the PDPA Security Principle (and feeds th
 
 ## 🗺️ Roadmap
 
-The kit is evolving from a *knowledge* plugin into a full **compliance evidence & litigation toolkit**.
-
 | Status | Capability |
 |---|---|
-| ✅ **Shipped** | `malaysia-security-compliance` skill — law + OWASP controls + document templates |
-| ✅ **Shipped** | `compliance-evidence-reporter` — forensic-grade engine that turns an assessment into **hashed evidence (SHA-256 + reproducible commands)** and a **court-ready `.docx` + `.pdf`** report |
-| ✅ **Shipped** | **All four document types:** Defensive Due-Diligence · **Expert-Witness Report** (Evidence Act 1950 s.45) · **Offensive Gap-Analysis** (plaintiff-side) · **Incident / Forensic Report** (breach timeline + 72h/7d notification record) |
-| 🔭 **Next** | Per-document refinements, optional cryptographic PDF signing, and the same engine for new jurisdictions |
+| ✅ **Shipped** | `malaysia-security-compliance` — law + OWASP controls + fill-in document templates |
+| ✅ **Shipped** | `compliance-evidence-reporter` — forensic engine: hashed evidence (SHA-256 + reproducible commands) → court-ready `.docx` + `.pdf` |
+| ✅ **Shipped** | **All four document types** — Defensive Due-Diligence · Expert-Witness · Offensive Gap-Analysis · Incident / Forensic |
+| 🔭 **Next** | Cryptographic PDF signing · per-document polish · the same engine for new jurisdictions |
 
-> Design spec: [`docs/specs/2026-05-31-evidence-reporter-design.md`](docs/specs/2026-05-31-evidence-reporter-design.md)
+> Design spec & plan live in [`docs/`](docs/).
 
 ---
 
@@ -189,8 +200,9 @@ The kit is evolving from a *knowledge* plugin into a full **compliance evidence 
 
 | Law | Status | In the kit |
 |---|---|---|
-| **PDPA 2010**, as amended by **Act A1727 (2024)** | Full force **1 June 2025** | Roles, 7 principles, DPO thresholds, breach notification, cross-border, penalties |
+| **PDPA 2010**, as amended by **Act A1727 (2024)** | Full force **1 June 2025** | Roles, 7 principles, DPO thresholds, breach notification (72h/7d), cross-border, penalties |
 | **Cyber Security Act 2024** | In force **26 August 2024** | NCII duties, incident reporting |
+| **Evidence Act 1950 (s. 45)** | — | Basis for expert opinion in the Expert-Witness & Gap-Analysis reports |
 | **Copyright Act 1987** | — | License/SBOM exposure (GPL, dependency provenance) |
 | **Contracts Act 1950** | — | SOW, liability caps, DPA clauses |
 | **Penal Code / Computer Crimes Act 1997** | — | Unauthorised access framing |
@@ -202,12 +214,13 @@ The kit is evolving from a *knowledge* plugin into a full **compliance evidence 
 ## ⚠️ Disclaimer
 
 This is an **engineering kit, not legal advice.** It helps you build and document defensibly; it does
-**not** replace a qualified Malaysian lawyer. Penalties, notification timelines, and DPO thresholds
-must be confirmed with counsel before you rely on them.
+**not** replace a qualified Malaysian lawyer. Penalties, notification timelines, DPO thresholds, the
+"significant harm" breach threshold, and the exact wording of expert declarations must be confirmed
+with counsel before you rely on them.
 
 **Last verified against Malaysian law:** PDPA (Amendment) Act 2024 in full force **1 June 2025**;
 Cyber Security Act 2024 in force **26 August 2024**. Laws change — re-verify the cited sources in each
-reference file before each engagement.
+reference file before each engagement, and cite the version and date you relied on in every report.
 
 ---
 
@@ -217,7 +230,7 @@ Issues and pull requests welcome — especially:
 
 - Updates when Malaysian law changes (with an official source).
 - New control checks with a *"how to verify"* step.
-- Additional fill-in document templates.
+- Additional document templates on the shared engine.
 
 Keep the kit **portable and project-agnostic** — no client names, no stack-specific assumptions.
 
