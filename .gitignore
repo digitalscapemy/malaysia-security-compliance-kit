@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Render outputs / working evidence (operators run these locally, never commit)
+out/
+*.aux
+*.log
+*.toc
+evidence-register.jsonl
+register-numbered.jsonl
+exhibits.md
+filled.md
+
+# OS / editor
+.DS_Store
+Thumbs.db
