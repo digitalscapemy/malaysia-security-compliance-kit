@@ -61,16 +61,14 @@ class ExhibitTest(unittest.TestCase):
         self.assertIn("A-1", table)
         self.assertIn("Nginx TLS", table)
         self.assertIn("a" * 64, table)
+        self.assertIn("SHA-256:", table)  # block layout, not a wide table
 
-    def test_summary_table_escapes_pipes_in_cells(self):
-        rec = br.assign_exhibits([make_record(
-            "a" * 64, description="cmd with | pipe", command="openssl x | tee out",
-        )])
+    def test_summary_table_renders_command_pipe_literally(self):
+        # Block layout has no table to break, so a piped command stays verbatim — no `\|` artifact.
+        rec = br.assign_exhibits([make_record("a" * 64, command="openssl x | tee out")])
         table = br.summary_table(rec)
-        # the raw unescaped sequences must not appear; escaped form must
-        self.assertNotIn("with | pipe", table)
-        self.assertIn(r"with \| pipe", table)
-        self.assertIn(r"openssl x \| tee out", table)
+        self.assertIn("openssl x | tee out", table)
+        self.assertNotIn(r"\|", table)
 
 
 if __name__ == "__main__":

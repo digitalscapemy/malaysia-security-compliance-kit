@@ -59,23 +59,26 @@ def assign_exhibits(records: list, prefix: str = "A") -> list:
     return out
 
 
-def _escape_cell(value: str) -> str:
-    """Escape characters that would break a Markdown table cell."""
-    return str(value).replace("\\", "\\\\").replace("|", "\\|").replace("\n", " ").replace("\r", " ")
+def _inline(value: str) -> str:
+    """Collapse newlines so a value stays on one logical Markdown line."""
+    return str(value).replace("\r", " ").replace("\n", " ")
 
 
 def summary_table(records: list) -> str:
-    """Render a Markdown exhibit table from records that already carry an 'exhibit' label."""
-    lines = [
-        "| Exhibit | Description | SHA-256 | Collected (MYT) | Source command |",
-        "|---|---|---|---|---|",
-    ]
+    """Render the exhibit register as one clean block per exhibit.
+
+    A per-exhibit block (rather than a wide 5-column table) keeps the full 64-character SHA-256 on
+    its own line: it never overflows the page when typeset, and stays copy-exact for verification.
+    """
+    blocks = []
     for rec in records:
-        lines.append(
-            f"| {rec['exhibit']} | {_escape_cell(rec['description'])} | `{rec['sha256']}` | "
-            f"{rec['collected_at']} | `{_escape_cell(rec['command'])}` |"
+        blocks.append(
+            f"**Exhibit {rec['exhibit']} — {_inline(rec['description'])}**\n\n"
+            f"- SHA-256: `{rec['sha256']}`\n"
+            f"- Collected (MYT): {rec['collected_at']}\n"
+            f"- Source command: `{_inline(rec['command'])}`\n"
         )
-    return "\n".join(lines) + "\n"
+    return "\n".join(blocks)
 
 
 def main(argv: list | None = None) -> int:
