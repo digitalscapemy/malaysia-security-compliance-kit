@@ -59,6 +59,11 @@ def assign_exhibits(records: list, prefix: str = "A") -> list:
     return out
 
 
+def _escape_cell(value: str) -> str:
+    """Escape characters that would break a Markdown table cell."""
+    return str(value).replace("\\", "\\\\").replace("|", "\\|").replace("\n", " ").replace("\r", " ")
+
+
 def summary_table(records: list) -> str:
     """Render a Markdown exhibit table from records that already carry an 'exhibit' label."""
     lines = [
@@ -67,8 +72,8 @@ def summary_table(records: list) -> str:
     ]
     for rec in records:
         lines.append(
-            f"| {rec['exhibit']} | {rec['description']} | `{rec['sha256']}` | "
-            f"{rec['collected_at']} | `{rec['command']}` |"
+            f"| {rec['exhibit']} | {_escape_cell(rec['description'])} | `{rec['sha256']}` | "
+            f"{rec['collected_at']} | `{_escape_cell(rec['command'])}` |"
         )
     return "\n".join(lines) + "\n"
 

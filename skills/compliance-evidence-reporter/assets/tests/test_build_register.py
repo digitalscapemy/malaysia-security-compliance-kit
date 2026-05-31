@@ -62,6 +62,16 @@ class ExhibitTest(unittest.TestCase):
         self.assertIn("Nginx TLS", table)
         self.assertIn("a" * 64, table)
 
+    def test_summary_table_escapes_pipes_in_cells(self):
+        rec = br.assign_exhibits([make_record(
+            "a" * 64, description="cmd with | pipe", command="openssl x | tee out",
+        )])
+        table = br.summary_table(rec)
+        # the raw unescaped sequences must not appear; escaped form must
+        self.assertNotIn("with | pipe", table)
+        self.assertIn(r"with \| pipe", table)
+        self.assertIn(r"openssl x \| tee out", table)
+
 
 if __name__ == "__main__":
     unittest.main()
