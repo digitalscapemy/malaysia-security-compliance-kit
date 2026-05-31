@@ -59,5 +59,25 @@ class PandocSmokeTest(unittest.TestCase):
         self.assertTrue(out.is_file() and out.stat().st_size > 0)
 
 
+@unittest.skipUnless(shutil.which("pandoc"), "pandoc not installed")
+class MainCliTest(unittest.TestCase):
+    """Exercises main()'s success path — including the result print — which must stay ASCII-safe
+    so it doesn't crash on Windows' cp1252 console."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self._tmp.name)
+        self.md = self.dir / "doc.md"
+        self.md.write_text("# Title\n\nBody.\n", encoding="utf-8")
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def test_main_returns_zero_on_success(self):
+        rc = rd.main(["--input", str(self.md), "--outdir", str(self.dir / "out"), "--skip-pdf"])
+        self.assertEqual(rc, 0)
+        self.assertTrue((self.dir / "out" / "report.docx").is_file())
+
+
 if __name__ == "__main__":
     unittest.main()

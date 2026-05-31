@@ -91,7 +91,7 @@ def main(argv: list | None = None) -> int:
         return 1
 
     tail = "" if args.skip_pdf else f" + {outdir / 'report.pdf'}"
-    print(f"rendered → {outdir / 'report.docx'}{tail}")
+    print(f"rendered -> {outdir / 'report.docx'}{tail}")
     return 0
 
 
