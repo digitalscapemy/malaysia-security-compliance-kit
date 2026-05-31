@@ -29,6 +29,9 @@ Knowledge of *what* to check lives in the `malaysia-security-compliance` skill; 
 - Python 3.10+ (scripts use the standard library only).
 - **pandoc** (https://pandoc.org/installing.html) and a LaTeX engine with **xelatex** (TeX Live or
   MiKTeX) for PDF output. The render script fails loudly with install guidance if either is absent.
+- The PDF template sets `mainfont: "Inter"` (a clean modern sans). Install Inter, or change the
+  `mainfont` line in `assets/templates/defensive-due-diligence.md.tmpl` to a font you have
+  (e.g. `Open Sans`, `Arial`) — xelatex errors if the named font is missing.
 
 ## Workflow (summary — full detail in references/workflow.md)
 
