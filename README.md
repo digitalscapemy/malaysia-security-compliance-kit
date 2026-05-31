@@ -15,6 +15,7 @@ infra & ops) directly into your build — and gives you the **documents to prove
 [![PDPA 2024](https://img.shields.io/badge/PDPA-Amendment%202024-success)](skills/malaysia-security-compliance/references/01-malaysian-law.md)
 [![Cyber Security Act 2024](https://img.shields.io/badge/Cyber%20Security%20Act-2024-success)](skills/malaysia-security-compliance/references/01-malaysian-law.md)
 [![Jurisdiction: Malaysia](https://img.shields.io/badge/Jurisdiction-Malaysia-red)](#)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](#️-roadmap)
 
 </div>
 
@@ -47,7 +48,7 @@ without you needing to reverse-engineer the statutes yourself.
 | 👩‍💻 A developer / dev shop | A pre-go-live gate and OWASP controls mapped to Malaysian law |
 | 🏢 A SaaS / hosting operator | Your data-processor duties, spelled out, with the documents to satisfy them |
 | 🔍 A security auditor | Control tables with a *"how to verify"* column for every item |
-| ⚖️ An expert witness / legal advisor | The legal framework, penalties, and sources — plus *(coming soon)* a forensic-grade report engine |
+| ⚖️ An expert witness / legal advisor | The legal framework, penalties, and sources — **plus a forensic-grade engine that produces court-ready evidence reports** |
 
 ---
 
@@ -79,6 +80,31 @@ routes to **only** the reference a task needs — never dumping everything at on
 
 ---
 
+## 📑 Court-ready evidence reports `new in v1.1.0`
+
+The **`compliance-evidence-reporter`** skill turns an assessment into **provable evidence** and a
+**court-ready document** — for PDPA matters, breach investigations, customer audits, or litigation.
+
+1. **Hashes every exhibit** — SHA-256 + ISO-8601 (MYT) timestamp + the exact command that produced
+   it, appended to an append-only chain-of-custody register.
+2. **Numbers the exhibits** (A-1, A-2 …) and builds the evidence register.
+3. **Renders** a **Defensive Due-Diligence Report** to **`.docx` + `.pdf`** — table of contents,
+   controls table, legal mapping, hashed exhibit register, and a signed declaration, with a
+   *"CONFIDENTIAL — Prepared in Contemplation of Litigation"* footer on every page.
+
+Forensic by design: hashes are copy-exact and every exhibit is reproducible, so the report survives
+cross-examination. Three standard-library Python scripts do the deterministic work (hash → register →
+render); Claude does the assessment and legal mapping.
+
+**Prerequisites:** Python 3.10+, [pandoc](https://pandoc.org/installing.html) + a LaTeX engine with
+**xelatex** (TeX Live / MiKTeX) for PDF, and the **Inter** font (or change `mainfont` in the
+template). Full procedure: [`skills/compliance-evidence-reporter/references/workflow.md`](skills/compliance-evidence-reporter/references/workflow.md).
+
+> More document types — expert-witness, offensive gap-analysis, incident/forensic — are on the
+> [roadmap](#️-roadmap), built on the same engine.
+
+---
+
 ## 🚀 Install
 
 ### Via plugin marketplace (recommended)
@@ -93,12 +119,15 @@ routes to **only** the reference a task needs — never dumping everything at on
 Copy the skill into your skills directory:
 
 ```bash
-# Every project (user-level)
-cp -r skills/malaysia-security-compliance ~/.claude/skills/
+# Every project (user-level) — copy both skills
+cp -r skills/malaysia-security-compliance skills/compliance-evidence-reporter ~/.claude/skills/
 
 # A single project
-cp -r skills/malaysia-security-compliance <project>/.claude/skills/
+cp -r skills/malaysia-security-compliance skills/compliance-evidence-reporter <project>/.claude/skills/
 ```
+
+> The `compliance-evidence-reporter` skill additionally needs pandoc + xelatex + the Inter font to
+> render documents (see [Court-ready evidence reports](#-court-ready-evidence-reports-new-in-v110)).
 
 ---
 
@@ -111,17 +140,18 @@ Once installed, just work as normal — the skill activates itself. Try:
 > *"Scan for hardcoded credentials and secrets in git history."*
 > *"Draft a breach-response runbook for a SaaS handling 50,000 users."*
 > *"Do I need to appoint a DPO?"*
+> *"Produce a court-ready due-diligence report with hashed evidence for this codebase."*
 
 It reads only the reference(s) the task needs, applies the controls, and points you at the matching
-evidence artifact to keep.
+evidence artifact to keep — or, for the last example, hashes the evidence and renders the report.
 
 ---
 
 ## 🔧 Recommended scanning & pentest tools
 
 The kit tells you *what* to check; these tools *prove* it. Run them, keep the output — each report is
-a dated evidence artifact that defends the PDPA Security Principle (and feeds the forthcoming
-evidence-reporter as a hashed exhibit). All four are free / open-source or have a free tier.
+a dated evidence artifact that defends the PDPA Security Principle (and feeds the
+`compliance-evidence-reporter` as a hashed exhibit). All four are free / open-source or have a free tier.
 
 | Tool | Type | Use it to |
 |---|---|---|
