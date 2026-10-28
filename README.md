@@ -75,6 +75,7 @@ everything at once.
 | [`03-application-security.md`](skills/malaysia-security-compliance/references/03-application-security.md) | OWASP **Web + API** Top 10 — control table with *how to verify* |
 | [`04-mobile-app-security.md`](skills/malaysia-security-compliance/references/04-mobile-app-security.md) | OWASP **Mobile** Top 10 + MASVS + iOS / Android + App Store / Play Store compliance |
 | [`05-infrastructure-ops-security.md`](skills/malaysia-security-compliance/references/05-infrastructure-ops-security.md) | Encryption-at-rest, backups, hardening, monitoring, incident response |
+| [`06-critical-runtime-cve.md`](skills/malaysia-security-compliance/references/06-critical-runtime-cve.md) | Critical runtime CVE response (detect → patched pin → post-deploy check); PHP2Shell CVE-2026-109618/109619 |
 | 📁 [`templates/`](skills/malaysia-security-compliance/references/templates) | Fill-in documents: **DPA**, **breach runbook**, **retention policy**, **sub-processor register**, **security policy** |
 
 ### The non-negotiables (fast check)
@@ -86,7 +87,8 @@ everything at once.
 5. **Encryption at rest** (DB + storage + backups); **TLS** in transit; passwords bcrypt/argon2.
 6. **Audit trail** on sensitive actions; never log PII/secrets.
 7. **SCA + SBOM/license scan** in CI.
-8. **Have the documents** — DPA, breach runbook (72h/7d), retention policy, sub-processor register, DPO if over the threshold.
+8. **Runtime patched** — no critical-CVE PHP/Node in prod; pin exact patched versions (`06`).
+9. **Have the documents** — DPA, breach runbook (72h/7d), retention policy, sub-processor register, DPO if over the threshold.
 
 ---
 

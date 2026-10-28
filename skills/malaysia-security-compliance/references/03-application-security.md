@@ -16,7 +16,7 @@ actually checks.
 | **Cryptographic Failures** | TLS 1.2+ everywhere + HSTS. **Encryption at rest** (DB + storage + backups). Passwords hashed with **bcrypt/argon2** (never MD5/SHA1/plaintext). Encrypt sensitive columns. | Check TLS, at-rest flags, password hash algorithm |
 | **Insecure Design / Mass Assignment** | Explicit allow-list of mass-assignable fields; guard privilege fields (role, approved/verified flags, balances) — set only via explicit code. | Review model fillable lists; confirm privilege fields guarded |
 | **Security Misconfiguration** | `APP_DEBUG=false` in prod; security headers (CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, HSTS); no directory listing; default creds removed; verbose errors off. | Curl prod; inspect headers; confirm debug off |
-| **Vulnerable Components** | SCA in CI (see `02` §3); patch cadence; CVE feed subscription. | Confirm audit jobs block on HIGH/CRITICAL |
+| **Vulnerable Components** | SCA in CI (see `02` §3); patch cadence; CVE feed subscription. Runtime itself (PHP/Node) on a patched version (see `06`). | Confirm audit jobs block on HIGH/CRITICAL; check prod runtime version |
 | **Identification & Auth Failures** | Rate-limit + lockout on login/reset; strong password policy; **MFA** for privileged accounts; session fixation prevention; invalidate sessions on logout/deactivation. | Rapid-login test → throttled; confirm MFA on admin |
 | **Software/Data Integrity Failures** | Verify integrity of updates/CI artifacts; signed packages; no deserialisation of untrusted data. | Review update + deserialisation paths |
 | **Logging & Monitoring Failures** | Audit trail for **sensitive actions** (auth, privilege change, data export, admin, impersonation). Centralised, tamper-resistant. **Never log PII, passwords, tokens, full PAN.** Alert on anomalies. | Confirm audit mechanism called from sensitive paths; grep logs for leaked secrets |
@@ -43,10 +43,6 @@ actually checks.
 | **Security Misconfiguration** | Disable unused verbs/endpoints; lock CORS to known origins; consistent error format that doesn't leak internals |
 | **Improper Inventory Management** | Document every API version/host; retire/deprecate old versions deliberately (don't break customers silently — version it) |
 | **Unsafe Consumption of 3rd-party APIs** | Validate and sanitise data you receive from upstream APIs as if it were user input |
-
-**Contract stability:** treat a public API as a contract. Renaming/removing a field silently breaks
-every integration. Pin the field list with snapshot/contract tests, keep an OpenAPI spec as the
-source of truth, and ship breaking changes under a new version with a deprecation timeline.
 
 ---
 

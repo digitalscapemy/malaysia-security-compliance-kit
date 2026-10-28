@@ -21,12 +21,9 @@ The strongest predictor of surviving a claim is paperwork signed *before* the pr
 
 ## 2. Secrets management
 
-- [ ] `.env` and every secret file in `.gitignore` from commit #1 (also `.env.production`, `.env.backup`, `auth.json`, `*.key`, `*.pem`)
-- [ ] **Never** hardcode API keys, DB passwords, app keys, JWT secrets in source
-- [ ] Secrets injected at runtime (env vars / secrets manager / vault), never baked into images or client bundles
-- [ ] **Secret scanning in CI** (e.g. Gitleaks) over the **full git history**, not just the diff — a secret committed then "deleted" is still leaked
-- [ ] If a secret leaks: **rotate it**, don't just delete the commit
-- [ ] Mobile/JS clients: secrets in a public bundle are **not secret** — move them server-side or use short-lived tokens
+- [ ] `.env` and every secret file gitignored from commit #1 (`.env.*` except `.example`, `auth.json`, `*.key`, `*.pem`)
+- [ ] Secrets injected at runtime (env / secrets manager / vault), never in source, images, or client bundles (a public JS/mobile bundle is **not secret**)
+- [ ] **Secret scanning in CI** (Gitleaks) over the **full git history**; on a leak, **rotate**, don't just delete the commit
 
 ### 2a. Hardcoded-credential scan — MANDATORY on every build & review
 
@@ -69,29 +66,17 @@ Remediation: gitignore + remove the file → **rotate the exposed secret** (dele
 - [ ] **SBOM + license report** generated and committed (`composer licenses` / `license-checker` / Syft → `THIRD_PARTY_LICENSES`) — your defence against GPL-contamination/copyright claims
 - [ ] Be skeptical of AI-suggested packages — confirm the package actually exists, is the real one (typo-squatting), and is reputable
 
+- [ ] **Runtime pinned to an exact, patched version** (Docker `FROM`, host package) and on the CVE watch list; a critical runtime CVE → `06`
+
 ## 4. Quality & security gates in CI
 
-- [ ] **SAST** — static analysis (PHPStan/Psalm/Semgrep, ESLint security rules)
-- [ ] **Linting / format** check
-- [ ] **Automated tests** — unit + integration + a few security tests (authz, injection, file-upload, tenant isolation)
-- [ ] **DAST / pentest** — at minimum a scanner sweep; an **external pentest** before launching anything handling PII (strongest due-diligence evidence)
-- [ ] Branch protection on `main` requiring green CI + code review
-- [ ] **Archive CI run output** (scan + test reports), dated — this is your "tested before go-live" proof
+- [ ] **SAST** (PHPStan/Psalm/Semgrep, ESLint security rules) + lint
+- [ ] **Security tests**: unauthorised access → 403/404, injection neutralised, cross-tenant blocked, upload can't execute. Never silently skip a failing auth test
+- [ ] **DAST / pentest**: at minimum a scanner sweep; an **external pentest** before launching anything handling PII (strongest due-diligence evidence)
+- [ ] Branch protection on `main`: green CI + code review (reviewer checks the `03`–`05` controls, not just functionality), no direct pushes
+- [ ] **Archive CI run output** (scan + test reports), dated: your "tested before go-live" proof
 
-## 5. Code review
-
-- [ ] Every change reviewed before merge
-- [ ] Reviewer checks the section-03/04/05 controls, not just functionality
-- [ ] No direct pushes to `main`
-
-## 6. Testing discipline
-
-- [ ] Happy paths, failure paths, edge cases
-- [ ] Security-relevant tests: unauthorised access returns 403/404; injection payloads are neutralised; cross-tenant access is blocked
-- [ ] Don't silently skip failing tests — a skipped auth test can hide a real regression
-- [ ] Keep coverage honest; don't let it skew to only the easy surfaces
-
-## 7. Evidence & documentation register (keep these, dated)
+## 5. Evidence & documentation register (keep these, dated)
 
 | Artifact | Defends against |
 |---|---|
@@ -112,7 +97,7 @@ Remediation: gitignore + remove the file → **rotate the exposed secret** (dele
 
 Templates for the documents above are in [`templates/`](templates/).
 
-## 8. Pre-go-live one-page gate
+## 6. Pre-go-live one-page gate
 
 Do **not** launch a system handling personal data with any of these unchecked:
 
@@ -125,7 +110,7 @@ PRIVACY        [ ] Bilingual privacy notice live  [ ] Retention/deletion policy 
 
 SECRETS/SUPPLY [ ] Hardcoded-credential scan clean (§2a) — no secrets/default admin pw/DB dumps
                [ ] No secrets in source or git history  [ ] SCA green (no HIGH/CRITICAL)
-               [ ] SBOM + license report stored
+               [ ] SBOM + license report stored  [ ] Runtime on patched version, no critical CVE (06)
 
 APP SECURITY   [ ] Queries parameterised; dynamic identifiers whitelisted (03)
                [ ] Authz enforced server-side on every write, resource passed (03)
@@ -141,5 +126,5 @@ INFRA/OPS      [ ] Encryption at rest (DB + storage + backups) (05)
                [ ] MFA on all prod/cloud/CI/registrar access (05)
                [ ] Monitoring + alerting live  [ ] IR runbook written (05)
 
-EVIDENCE       [ ] CI scan + test reports archived, dated  [ ] All section-7 docs filed
+EVIDENCE       [ ] CI scan + test reports archived, dated  [ ] All §5 docs filed
 ```

@@ -42,7 +42,8 @@ incident response.
 
 - [ ] Documented patch cadence for OS, runtime, framework, dependencies
 - [ ] Subscribe to CVE feeds for your stack; the CI SCA job (`02` §3) runs weekly
-- [ ] Track and remediate findings with SLAs (e.g. CRITICAL ≤ 7 days)
+- [ ] Track and remediate findings with SLAs (e.g. CRITICAL ≤ 7 days; critical unauthenticated runtime RCE → immediately, via `06`)
+- [ ] After a runtime patch, restart **every** process on the old binary (web, queue workers, schedulers, Horizon/Octane)
 
 ## Monitoring, logging & alerting
 

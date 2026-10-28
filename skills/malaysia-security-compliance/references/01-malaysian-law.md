@@ -61,7 +61,7 @@ Most ordinary SaaS is **not** directly regulated, but two triggers matter:
 ## C. Copyright Act 1987
 
 - **s.41** — offences for infringing copies and **unauthorised modification / removal of copyright notices**. Penalty: fine **RM2,000–RM20,000 per infringing copy**, or imprisonment up to **5 years**, or both.
-- **Engineering implication:** never paste licensed code (e.g. **GPL** / copyleft) into proprietary work, and never strip copyright/licence headers — including AI-generated snippets that may reproduce licensed code. Defend yourself with an **SBOM + license scan** (see `02` §4) and a committed `THIRD_PARTY_LICENSES` file.
+- **Engineering implication:** never paste licensed code (e.g. **GPL** / copyleft) into proprietary work, and never strip copyright/licence headers — including AI-generated snippets that may reproduce licensed code. Defend yourself with an **SBOM + license scan** (see `02` §3) and a committed `THIRD_PARTY_LICENSES` file.
 
 ---
 
@@ -86,7 +86,7 @@ Most ordinary SaaS is **not** directly regulated, but two triggers matter:
 | PDPA 2010 (Amd. 2024) | s.5 Security Principle | Failing to secure personal data | Controls in `02`–`05` + evidence register |
 | PDPA 2010 (Amd. 2024) | DPO / breach duties | No DPO over threshold; late/no breach notice | §A.3 + `templates/breach-response-runbook.md` |
 | Cyber Security Act 2024 | NCII / CSP licensing | Serving NCII clients; unlicensed security services | §B |
-| Copyright Act 1987 | s.41 | Copying GPL code; stripping notices | SBOM + license scan (`02` §4) |
+| Copyright Act 1987 | s.41 | Copying GPL code; stripping notices | SBOM + license scan (`02` §3) |
 | Contracts Act 1950 | s.74 | Breach causing client loss | SOW + liability cap + DPA + PI insurance |
 | Penal Code | s.417/419 | Misrepresenting competence | Honest proposals + UAT sign-off |
 

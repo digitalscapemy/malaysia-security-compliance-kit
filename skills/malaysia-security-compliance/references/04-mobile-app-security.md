@@ -36,8 +36,6 @@ Mapped to the **OWASP Mobile Top 10 (2024)** — the first major revision since 
 - **MASVS-RESILIENCE** — anti-tamper / reverse-engineering resistance (for high-risk apps)
 - **MASVS-PRIVACY** — minimise & protect user data, honour consent
 
-> Note: the old verification levels (L1/L2/R) were replaced in MASVS v2 by **MAS Testing Profiles** in the OWASP MASWE weakness enumeration.
-
 ## Practical implementation defaults
 
 - [ ] Secrets → **Keychain/Keystore**, never code or plaintext prefs
